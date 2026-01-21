@@ -15,8 +15,8 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({ milliseconds, isLowT
 
   const sizeClasses = {
     sm: "text-4xl",
-    lg: "text-7xl md:text-9xl",
-    xl: "text-8xl md:text-[10rem]"
+    lg: "text-6xl md:text-8xl",
+    xl: "text-7xl md:text-8xl lg:text-9xl"
   };
 
   return (

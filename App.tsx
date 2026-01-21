@@ -7,7 +7,7 @@ import { RoundManager } from './components/RoundManager';
 import { Timer, Users, Mic2, List, ChevronRight, ChevronLeft, Palette } from 'lucide-react';
 import { primeAudioContext } from './utils/sound';
 import competitionLogo from './assets/competition_logo.png';
-import competitionBg from './assets/competition_bg.jpg';
+import competitionBg from './assets/test2.jpg';
 
 const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<'TIMER' | 'FLOW'>('TIMER');
@@ -128,7 +128,10 @@ const App: React.FC = () => {
             {activeBackgroundImage && (
               <>
                 <div
-                  className="absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-700"
+                  className={`absolute inset-0 z-0 transition-opacity duration-700 ${isCompetitionTheme
+                    ? 'bg-cover bg-center top-16 bottom-0'
+                    : 'bg-cover bg-center'
+                    }`}
                   style={{ backgroundImage: `url(${activeBackgroundImage})` }}
                 />
                 {/* Dark Overlay for readability */}
@@ -202,23 +205,28 @@ const App: React.FC = () => {
               )}
 
               {/* Timer Component Render */}
-              <div className="flex-1 flex relative">
-                {isFlowMode && currentRound ? (
-                  currentRound.type === 'NORMAL' ? (
-                    <NormalTimer
-                      key={currentRound.id}
-                      initialDuration={currentRound.durationMinutes}
-                      speakerLabel={currentRound.speaker === 'A' ? '正方' : '反方'}
-                    />
+              <div className={`flex-1 flex relative justify-center items-center p-4 ${isCompetitionTheme ? 'py-8' : ''}`}>
+                <div className={`w-full max-w-6xl transition-all duration-500 ${isCompetitionTheme
+                  ? 'bg-slate-800/50 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700/50 p-8 md:p-12'
+                  : ''
+                  }`}>
+                  {isFlowMode && currentRound ? (
+                    currentRound.type === 'NORMAL' ? (
+                      <NormalTimer
+                        key={currentRound.id}
+                        initialDuration={currentRound.durationMinutes}
+                        speakerLabel={currentRound.speaker === 'A' ? '正方' : '反方'}
+                      />
+                    ) : (
+                      <ChessTimer
+                        key={currentRound.id}
+                        initialTime={currentRound.durationMinutes}
+                      />
+                    )
                   ) : (
-                    <ChessTimer
-                      key={currentRound.id}
-                      initialTime={currentRound.durationMinutes}
-                    />
-                  )
-                ) : (
-                  timerMode === TimerMode.STANDARD ? <NormalTimer /> : <ChessTimer />
-                )}
+                    timerMode === TimerMode.STANDARD ? <NormalTimer /> : <ChessTimer />
+                  )}
+                </div>
               </div>
             </div>
           </div>

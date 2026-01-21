@@ -116,11 +116,11 @@ export const ChessTimer: React.FC<ChessTimerProps> = ({ initialTime }) => {
         <div
           onClick={() => activeSpeaker !== SpeakerState.IDLE && toggleTimer('A')}
           className={`flex-1 rounded-3xl flex flex-col items-center justify-center transition-all cursor-pointer relative overflow-hidden border-4 ${isAActive
-              ? 'bg-brand-600 border-brand-400 shadow-[0_0_40px_rgba(2,132,199,0.5)]'
-              : 'bg-slate-800 border-slate-700 opacity-60 hover:opacity-80'
+            ? 'bg-brand-600 border-brand-400 shadow-[0_0_40px_rgba(2,132,199,0.5)]'
+            : 'bg-slate-800 border-slate-700 opacity-60 hover:opacity-80'
             }`}
         >
-          <div className="absolute top-6 left-6 flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-4 md:mb-8 mt-4 md:mt-8">
             <User className="w-6 h-6" />
             <span className="font-bold tracking-wider text-2xl">正方</span>
           </div>
@@ -134,11 +134,11 @@ export const ChessTimer: React.FC<ChessTimerProps> = ({ initialTime }) => {
         <div
           onClick={() => activeSpeaker !== SpeakerState.IDLE && toggleTimer('B')}
           className={`flex-1 rounded-3xl flex flex-col items-center justify-center transition-all cursor-pointer relative overflow-hidden border-4 ${isBActive
-              ? 'bg-emerald-600 border-emerald-400 shadow-[0_0_40px_rgba(5,150,105,0.5)]'
-              : 'bg-slate-800 border-slate-700 opacity-60 hover:opacity-80'
+            ? 'bg-emerald-600 border-emerald-400 shadow-[0_0_40px_rgba(5,150,105,0.5)]'
+            : 'bg-slate-800 border-slate-700 opacity-60 hover:opacity-80'
             }`}
         >
-          <div className="absolute top-6 right-6 flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-4 md:mb-8 mt-4 md:mt-8">
             <span className="font-bold tracking-wider text-2xl">反方</span>
             <User className="w-6 h-6" />
           </div>
