@@ -4,7 +4,7 @@ import { TimerMode, Round } from './types';
 import { NormalTimer } from './components/NormalTimer';
 import { ChessTimer } from './components/ChessTimer';
 import { RoundManager } from './components/RoundManager';
-import { Timer, Users, Mic2, List, ChevronRight, ChevronLeft, Palette } from 'lucide-react';
+import { Timer, Users, Mic2, List, ChevronRight, ChevronLeft, ChevronDown, Palette } from 'lucide-react';
 import { primeAudioContext } from './utils/sound';
 import competitionLogo from './assets/competition_logo.png';
 import competitionBg from './assets/ID_Workshop_BG.jpg';
@@ -17,6 +17,7 @@ const App: React.FC = () => {
   const [rounds, setRounds] = useState<Round[]>([]);
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
   const [isFlowMode, setIsFlowMode] = useState(false);
+  const [showRoundPicker, setShowRoundPicker] = useState(false);
 
   // Branding / Settings State
   const [competitionName, setCompetitionName] = useState<string>('');
@@ -33,7 +34,13 @@ const App: React.FC = () => {
       setCurrentRoundIndex(0);
       setIsFlowMode(true);
       setCurrentTab('TIMER');
+      setShowRoundPicker(false);
     }
+  };
+
+  const jumpToRound = (index: number) => {
+    setCurrentRoundIndex(index);
+    setShowRoundPicker(false);
   };
 
   useEffect(() => {
@@ -153,7 +160,7 @@ const App: React.FC = () => {
 
               {/* Mode Switcher OR Flow Control Bar */}
               {isFlowMode && rounds.length > 0 ? (
-                <div className="bg-slate-900/80 border-b border-slate-800/50 p-3 flex items-center justify-between px-6 shadow-lg backdrop-blur-md">
+                <div className="bg-slate-900/80 border-b border-slate-800/50 p-3 flex items-center justify-between px-6 shadow-lg backdrop-blur-md relative z-50">
                   <button
                     onClick={prevRound}
                     disabled={currentRoundIndex === 0}
@@ -162,13 +169,114 @@ const App: React.FC = () => {
                     <ChevronLeft className="w-5 h-5" /> 上一环节
                   </button>
 
-                  <div className="text-center">
-                    <div className="text-xs text-slate-400 font-bold tracking-widest uppercase mb-1">
-                      第 {currentRoundIndex + 1} / {rounds.length} 环节
-                    </div>
-                    <div className="text-white font-bold flex items-center gap-2 justify-center text-lg shadow-black drop-shadow-md">
-                      {currentRound.title}
-                    </div>
+                  <div className="text-center relative">
+                    <button
+                      onClick={() => setShowRoundPicker(!showRoundPicker)}
+                      className="group cursor-pointer hover:bg-slate-800/60 rounded-lg px-4 py-1.5 transition-all"
+                    >
+                      <div className="text-xs text-slate-400 font-bold tracking-widest uppercase mb-1">
+                        第 {currentRoundIndex + 1} / {rounds.length} 环节
+                      </div>
+                      <div className="text-white font-bold flex items-center gap-2 justify-center text-lg shadow-black drop-shadow-md">
+                        {currentRound.title}
+                        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${showRoundPicker ? 'rotate-180' : ''}`} />
+                      </div>
+                    </button>
+
+                    {/* Round Picker Dropdown */}
+                    {showRoundPicker && (
+                      <>
+                        {/* Backdrop to close on outside click */}
+                        <div
+                          style={{ position: 'fixed', inset: 0, zIndex: 40 }}
+                          onClick={() => setShowRoundPicker(false)}
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            marginTop: '0.5rem',
+                            zIndex: 50,
+                            width: '18rem',
+                            maxHeight: '20rem',
+                            overflowY: 'auto',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            backgroundColor: 'rgb(30 41 59)',
+                            border: '1px solid rgb(51 65 85)',
+                            borderRadius: '0.75rem',
+                            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+                            padding: '0.25rem 0',
+                          }}
+                        >
+                          {rounds.map((round, index) => (
+                            <button
+                              key={round.id}
+                              onClick={() => jumpToRound(index)}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.75rem',
+                                width: '100%',
+                                textAlign: 'left' as const,
+                                padding: '0.625rem 1rem',
+                                borderLeft: index === currentRoundIndex ? '2px solid var(--color-brand-500)' : '2px solid transparent',
+                                backgroundColor: index === currentRoundIndex ? 'rgba(var(--color-brand-600), 0.2)' : 'transparent',
+                                color: index === currentRoundIndex ? 'var(--color-brand-500)' : 'rgb(203 213 225)',
+                                transition: 'background-color 0.15s',
+                                cursor: 'pointer',
+                                border: 'none',
+                                borderLeftWidth: '2px',
+                                borderLeftStyle: 'solid',
+                                borderLeftColor: index === currentRoundIndex ? 'var(--color-brand-500)' : 'transparent',
+                              }}
+                              onMouseEnter={(e) => {
+                                if (index !== currentRoundIndex) {
+                                  e.currentTarget.style.backgroundColor = 'rgba(51, 65, 85, 0.6)';
+                                  e.currentTarget.style.color = 'white';
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (index !== currentRoundIndex) {
+                                  e.currentTarget.style.backgroundColor = 'transparent';
+                                  e.currentTarget.style.color = 'rgb(203 213 225)';
+                                }
+                              }}
+                            >
+                              <span style={{
+                                fontSize: '0.75rem',
+                                fontWeight: 700,
+                                width: '1.5rem',
+                                height: '1.5rem',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                                backgroundColor: index === currentRoundIndex ? 'var(--color-brand-600)' : 'rgb(51 65 85)',
+                                color: index === currentRoundIndex ? 'white' : 'rgb(148 163 184)',
+                              }}>
+                                {index + 1}
+                              </span>
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{ fontSize: '0.875rem', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                  {round.title}
+                                </div>
+                                <div style={{ fontSize: '0.75rem', color: 'rgb(100 116 139)' }}>
+                                  {round.durationMinutes >= 1
+                                    ? `${round.durationMinutes} 分钟`
+                                    : `${round.durationMinutes * 60} 秒`
+                                  }
+                                  {round.type === 'CHESS' ? ' · 棋钟' : ''}
+                                </div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <button

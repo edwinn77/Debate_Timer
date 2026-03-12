@@ -161,22 +161,26 @@
             {
                 "title": "教练喊停环节",
                 "type": "NORMAL",
-                "durationMinutes": 2
+                "durationMinutes": 3,
+                "speaker": "A"
             },
             {
                 "title": "教练喊停环节",
                 "type": "NORMAL",
-                "durationMinutes": 3
+                "durationMinutes": 3,
+                "speaker": "B"
             },
             {
                 "title": "正方·紧急暂停",
                 "type": "NORMAL",
-                "durationMinutes": 2
+                "durationMinutes": 2,
+                "speaker": "A"
             },
             {
                 "title": "反方·紧急暂停",
                 "type": "NORMAL",
-                "durationMinutes": 2
+                "durationMinutes": 2,
+                "speaker": "B"
             }
         ]
     },
