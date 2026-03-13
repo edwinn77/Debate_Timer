@@ -53,7 +53,7 @@ export const playAlertSound = async (type: 'warning' | 'end') => {
     const WARNING_FREQ = 880; // A5
     const WARNING_INITIAL_GAIN = 0.80; // increase volume for warning
 
-    const END_DURATION = 2.0; // seconds
+    const END_DURATION = 1.8; // seconds
     const END_FREQ = 440; // A4
     const END_INITIAL_GAIN = 0.20;
 
@@ -69,13 +69,32 @@ export const playAlertSound = async (type: 'warning' | 'end') => {
       osc.start(now);
       osc.stop(now + WARNING_DURATION);
     } else {
-      // Long beep (Lower pitch, longer sustain) - Time up
+
+      // "Beep-Beep" (Double pulse) - Time up
+      const GAP_START = 0.4; // First beep ends at 0.4s
+      const GAP_END = 0.6;   // Second beep starts at 0.6s
+      
       osc.type = 'square';
       osc.frequency.setValueAtTime(END_FREQ, now);
+      
+      // -- First Beep --
       gain.gain.setValueAtTime(END_INITIAL_GAIN, now);
-      // Keep the end alert sustained then fade out to 0
-      gain.gain.linearRampToValueAtTime(END_INITIAL_GAIN, now + 1.0);
+      // Hold volume until gap starts
+      gain.gain.setValueAtTime(END_INITIAL_GAIN, now + GAP_START); 
+      
+      // -- The Silence (The Gap) --
+      // Quickly drop to 0
+      gain.gain.linearRampToValueAtTime(0, now + GAP_START + 0.05); 
+      // Stay at 0 until GAP_END
+      gain.gain.setValueAtTime(0, now + GAP_END); 
+      
+      // -- Second Beep --
+      // Quickly jump back up
+      gain.gain.linearRampToValueAtTime(END_INITIAL_GAIN, now + GAP_END + 0.05);
+      // Sustain then fade out at the very end
+      gain.gain.linearRampToValueAtTime(END_INITIAL_GAIN, now + END_DURATION - 0.5);
       gain.gain.linearRampToValueAtTime(0, now + END_DURATION);
+
       osc.start(now);
       osc.stop(now + END_DURATION);
     }
