@@ -323,7 +323,7 @@ const App: React.FC = () => {
                       <NormalTimer
                         key={currentRound.id}
                         initialDuration={currentRound.durationMinutes}
-                        speakerLabel={currentRound.speaker === 'A' ? '正方' : currentRound.speaker === 'B' ? '反方' : ''}
+                        speakerLabel={currentRound.title === '铃声测试' ? '测试' : currentRound.speaker === 'A' ? '正方' : currentRound.speaker === 'B' ? '反方' : ''}
                       />
                     ) : (
                       <ChessTimer

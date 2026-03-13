@@ -94,6 +94,16 @@
         "description": "《辩有趣》全槟华小华语辩论比赛赛制",
         "rounds": [
             {
+                "title": "铃声测试",
+                "type": "NORMAL",
+                "durationMinutes": 0.6
+            },
+            {
+                "title": "铃声测试",
+                "type": "NORMAL",
+                "durationMinutes": 0.1
+            },
+            {
                 "title": "正方一辩立论",
                 "type": "NORMAL",
                 "durationMinutes": 3.5,
