@@ -22,6 +22,7 @@ const App: React.FC = () => {
   const [competitionName, setCompetitionName] = useState<string>('');
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [isCompetitionTheme, setIsCompetitionTheme] = useState(false);
+  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(null);
 
   const currentRound = rounds[currentRoundIndex];
 
@@ -203,9 +204,11 @@ const App: React.FC = () => {
 
               {/* Timer Component Render */}
               <div className={`flex-1 flex relative justify-center items-center p-4 ${activeBackgroundImage ? 'py-8' : ''}`}>
-                <div className={`w-full transition-all duration-500 ${activeBackgroundImage && !(isFlowMode && currentRound ? currentRound.type !== 'NORMAL' : timerMode === TimerMode.CHESS)
-                  ? 'max-w-5xl bg-slate-800/35 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700/35 p-7 md:p-9'
-                  : 'max-w-6xl p-8 md:p-12'
+                <div className={`transition-all duration-500 ${activeBackgroundImage && !(isFlowMode && currentRound ? currentRound.type !== 'NORMAL' : timerMode === TimerMode.CHESS)
+                  ? (activeTemplateId === 'MONASH'
+                      ? 'w-full max-w-[500px] aspect-square bg-slate-800/35 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-slate-700/35 p-8 flex flex-col justify-center'
+                      : 'w-full max-w-5xl bg-slate-800/35 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700/35 p-7 md:p-9')
+                  : 'w-full max-w-6xl p-8 md:p-12'
                   }`}>
                   {isFlowMode && currentRound ? (
                     currentRound.type === 'NORMAL' ? (
@@ -236,6 +239,7 @@ const App: React.FC = () => {
             setCompetitionName={setCompetitionName}
             backgroundImage={backgroundImage}
             setBackgroundImage={setBackgroundImage}
+            onTemplateLoaded={setActiveTemplateId}
           />
         )}
       </main>

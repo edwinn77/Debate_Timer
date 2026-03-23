@@ -13,6 +13,7 @@ interface RoundManagerProps {
   setCompetitionName: (name: string) => void;
   backgroundImage: string | null;
   setBackgroundImage: (url: string | null) => void;
+  onTemplateLoaded?: (id: string) => void;
 }
 
 export const RoundManager: React.FC<RoundManagerProps> = ({
@@ -22,7 +23,8 @@ export const RoundManager: React.FC<RoundManagerProps> = ({
   competitionName,
   setCompetitionName,
   backgroundImage,
-  setBackgroundImage
+  setBackgroundImage,
+  onTemplateLoaded
 }) => {
   const [newTitle, setNewTitle] = useState('');
   const [newDuration, setNewDuration] = useState(4);
@@ -71,6 +73,9 @@ export const RoundManager: React.FC<RoundManagerProps> = ({
     }));
 
     setRounds(rounds);
+    if (onTemplateLoaded) {
+      onTemplateLoaded(template.id);
+    }
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
