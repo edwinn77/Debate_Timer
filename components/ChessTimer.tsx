@@ -72,6 +72,29 @@ export const ChessTimer: React.FC<ChessTimerProps> = ({ initialTime }) => {
   };
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (activeSpeaker === SpeakerState.SPEAKER_A) {
+          setActiveSpeaker(SpeakerState.SPEAKER_B);
+        } else if (activeSpeaker === SpeakerState.SPEAKER_B) {
+          setActiveSpeaker(SpeakerState.SPEAKER_A);
+        } else if (activeSpeaker === SpeakerState.IDLE) {
+          if (pausedState !== SpeakerState.IDLE) {
+            setActiveSpeaker(pausedState);
+          } else {
+            setActiveSpeaker(SpeakerState.SPEAKER_A);
+          }
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeSpeaker, pausedState]);
+
+  useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
 
     if (activeSpeaker !== SpeakerState.IDLE) {
