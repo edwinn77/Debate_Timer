@@ -206,8 +206,8 @@ const App: React.FC = () => {
               <div className={`flex-1 flex relative justify-center items-center p-4 ${activeBackgroundImage ? 'py-8' : ''}`}>
                 <div className={`transition-all duration-500 ${activeBackgroundImage && !(isFlowMode && currentRound ? currentRound.type !== 'NORMAL' : timerMode === TimerMode.CHESS)
                   ? (activeTemplateId === 'MONASH'
-                      ? 'w-full max-w-[500px] aspect-square bg-slate-800/35 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-slate-700/35 p-8 flex flex-col justify-center'
-                      : 'w-full max-w-5xl bg-slate-800/35 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700/35 p-7 md:p-9')
+                    ? 'w-full max-w-[420px] aspect-square bg-slate-800/35 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-slate-700/35 p-8 flex flex-col justify-center'
+                    : 'w-full max-w-5xl bg-slate-800/35 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700/35 p-7 md:p-9')
                   : 'w-full max-w-6xl p-8 md:p-12'
                   }`}>
                   {isFlowMode && currentRound ? (
