@@ -74,7 +74,7 @@ export const ChessTimer: React.FC<ChessTimerProps> = ({ initialTime }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      
+
       if (e.code === 'Space') {
         e.preventDefault();
         if (activeSpeaker === SpeakerState.SPEAKER_A) {
@@ -181,7 +181,7 @@ export const ChessTimer: React.FC<ChessTimerProps> = ({ initialTime }) => {
 
         {activeSpeaker === SpeakerState.IDLE && pausedState === SpeakerState.IDLE ? (
           <Button variant="primary" size="lg" onClick={() => toggleTimer('A')} className="w-48">
-            开始辩论
+            开始计时
           </Button>
         ) : (
           <Button
