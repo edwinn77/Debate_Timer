@@ -87,6 +87,21 @@ export const NormalTimer: React.FC<NormalTimerProps> = ({ initialDuration, speak
     };
   }, [isRunning]);
 
+  // Handle spacebar to start/pause timer
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        handleStartPause();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleStartPause]);
+
   return (
     <div className="flex flex-col items-center justify-center space-y-12 h-full w-full py-8">
       <div className="flex flex-col items-center space-y-4">

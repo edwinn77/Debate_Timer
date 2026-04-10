@@ -54,6 +54,26 @@ const App: React.FC = () => {
     return () => eventTypes.forEach((et) => document.removeEventListener(et, handler));
   }, []);
 
+  // Handle Page Down/Up for round navigation
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (!isFlowMode) return;
+
+      if (event.code === 'PageDown') {
+        event.preventDefault();
+        nextRound();
+      } else if (event.code === 'PageUp') {
+        event.preventDefault();
+        prevRound();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [isFlowMode, currentRoundIndex, rounds.length]);
+
   // Theme Toggle Effect
   useEffect(() => {
     if (isCompetitionTheme) {
