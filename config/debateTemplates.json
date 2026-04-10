@@ -167,9 +167,19 @@
     },
     {
         "id": "pdcsr",
-        "name": "《辩有趣》全槟华小辩",
-        "description": "《辩有趣》全槟华小辩赛制",
+        "name": "《辩有趣》全槟华小华语辩论比赛",
+        "description": "《辩有趣》全槟华小华语辩论比赛赛制",
         "rounds": [
+            {
+                "title": "铃声测试",
+                "type": "NORMAL",
+                "durationMinutes": 0.6
+            },
+            {
+                "title": "铃声测试",
+                "type": "NORMAL",
+                "durationMinutes": 0.1
+            },
             {
                 "title": "正方一辩立论",
                 "type": "NORMAL",
@@ -238,12 +248,31 @@
             {
                 "title": "教练喊停环节",
                 "type": "NORMAL",
-                "durationMinutes": 2
+                "durationMinutes": 2,
+                "speaker": "A"
+            },
+            {
+                "title": "教练喊停环节",
+                "type": "NORMAL",
+                "durationMinutes": 2,
+                "speaker": "B"
             },
             {
                 "title": "教练喊停环节",
                 "type": "NORMAL",
                 "durationMinutes": 3
+            },
+            {
+                "title": "正方·紧急暂停",
+                "type": "NORMAL",
+                "durationMinutes": 2,
+                "speaker": "A"
+            },
+            {
+                "title": "反方·紧急暂停",
+                "type": "NORMAL",
+                "durationMinutes": 2,
+                "speaker": "B"
             }
         ]
     },
@@ -333,6 +362,129 @@
                 "type": "NORMAL",
                 "durationMinutes": 3.5,
                 "speaker": "A"
+            }
+        ]
+    },
+    {
+        "id": "1v1",
+        "name": "《辩有趣》1v1赛制",
+        "description": "《辩有趣》1对1辩论赛制",
+        "rounds": [
+            {
+                "title": "准备",
+                "type": "NORMAL",
+                "durationMinutes": 0.5
+            },
+            {
+                "title": "正方陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "A"
+            },
+            {
+                "title": "反方陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "B"
+            },
+            {
+                "title": "双方对辩",
+                "type": "CHESS",
+                "durationMinutes": 1
+            }
+        ]
+    },
+    {
+        "id": "2v2",
+        "name": "《辩有趣》2v2赛制",
+        "description": "《辩有趣》2对2辩论赛制",
+        "rounds": [
+            {
+                "title": "准备",
+                "type": "NORMAL",
+                "durationMinutes": 0.5
+            },
+            {
+                "title": "正1陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "A"
+            },
+            {
+                "title": "反1陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "B"
+            },
+            {
+                "title": "正2 vs 反2 对辩",
+                "type": "CHESS",
+                "durationMinutes": 1
+            },
+            {
+                "title": "反1总结",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "B"
+            },
+            {
+                "title": "正1总结",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "A"
+            }
+        ]
+    },
+    {
+        "id": "3v3",
+        "name": "《辩有趣》3v3赛制",
+        "description": "《辩有趣》3对3辩论赛制",
+        "rounds": [
+            {
+                "title": "准备",
+                "type": "NORMAL",
+                "durationMinutes": 0.5
+            },
+            {
+                "title": "正1陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "A"
+            },
+            {
+                "title": "反1陈词",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "B"
+            },
+            {
+                "title": "正2 vs 反2 对辩",
+                "type": "CHESS",
+                "durationMinutes": 1
+            },
+            {
+                "title": "正3 质询 反1",
+                "type": "NORMAL",
+                "durationMinutes": 0.75,
+                "speaker": "A"
+            },
+            {
+                "title": "反3 质询 正1",
+                "type": "NORMAL",
+                "durationMinutes": 0.75,
+                "speaker": "B"
+            },
+            {
+                "title": "正3总结",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "A"
+            },
+            {
+                "title": "反3总结",
+                "type": "NORMAL",
+                "durationMinutes": 0.5,
+                "speaker": "B"
             }
         ]
     },
