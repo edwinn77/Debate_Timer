@@ -7,7 +7,7 @@ import { RoundManager } from './components/RoundManager';
 import { Timer, Users, Mic2, List, ChevronRight, ChevronLeft, ChevronDown, Palette } from 'lucide-react';
 import { primeAudioContext } from './utils/sound';
 import competitionLogo from './assets/ID Competition Logo_Final2702.png';
-import competitionBg from './assets/ID Timekeeper-02.jpg';
+import competitionBg from './assets/ID Timekeeper-02.png';
 
 const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<'TIMER' | 'FLOW'>('TIMER');
