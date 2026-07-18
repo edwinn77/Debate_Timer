@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { TimerDisplay } from './TimerDisplay';
 import { playAlertSound } from '../utils/sound';
 
-const DEFAULT_TIME_MS = 4 * 60 * 1000; // 4 minutes
+const DEFAULT_TIME_MS = 0.5 * 60 * 1000; // 4 minutes
 
 interface NormalTimerProps {
   initialDuration?: number; // in minutes
