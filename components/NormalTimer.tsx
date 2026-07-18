@@ -140,16 +140,21 @@ export const NormalTimer: React.FC<NormalTimerProps> = ({ initialDuration, speak
       {/* Settings - Hide predefined buttons if controlled by flow (initialDuration passed) */}
       {!initialDuration && (
         <div className="flex gap-2 mt-8 bg-slate-800/50 p-2 rounded-xl">
-          {[3, 3.5, 4, 5, 7, 10].map(min => (
+          {[
+            { label: '30秒', val: 0.5 },
+            { label: '45秒', val: 0.75 },
+            { label: '1分钟', val: 1 },
+            { label: '3分钟', val: 3 }
+          ].map(({ label, val }) => (
             <button
-              key={min}
-              onClick={() => adjustTime(min)}
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${duration === min * 60 * 1000
+              key={val}
+              onClick={() => adjustTime(val)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${duration === val * 60 * 1000
                   ? 'bg-brand-600 text-white shadow-lg'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700'
                 }`}
             >
-              {min}分钟
+              {label}
             </button>
           ))}
         </div>

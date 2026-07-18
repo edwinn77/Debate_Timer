@@ -6,7 +6,7 @@ import { TimerDisplay } from './TimerDisplay';
 import { SpeakerState } from '../types';
 import { playAlertSound } from '../utils/sound';
 
-const DEFAULT_TIME_MS = 5 * 60 * 1000; // 5 minutes per side
+const DEFAULT_TIME_MS = 1 * 60 * 1000; // 5 minutes per side
 
 interface ChessTimerProps {
   initialTime?: number; // in minutes per side
